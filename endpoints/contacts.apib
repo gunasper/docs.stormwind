@@ -1,0 +1,63 @@
+# Group Contacts
+
+## Contacts Collection [/v0/users/{user_id}/contacts]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+
+### List all Contacts of a User [GET]
+
++ Response 200 (application/json)
+
+    + Attributes(ContactGET)
+
+### Create a new Contact [PUT]
+
++ Request (application/json)
+
+    + Attributes(Contact)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /contacts/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+## Single Contact [/v0/users/{user_id}/contacts/{contact_id}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + contact_id (UUID) - Identifier of the Contact in the form of a UUID
+
+### Get information about a specific Contact [GET]
+
++ Response 200 (application/json)
+
++ Attributes(Contact)
+
+### Update a Contact [PUT]
+
++ Request (application/json)
+
+    + Attributes(Contact)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /contacts/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+### Delete a Contact [DELETE]
++ Response 204 (application/json)

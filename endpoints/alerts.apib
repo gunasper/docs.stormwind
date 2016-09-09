@@ -1,0 +1,21 @@
+# Group History
+
+Collect information about the historic of a user.
+
+## Alerts Collection [/v0/history/alerts/{user_id}{?limit}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + limit (optional, Number) - How many Alerts to return. Max is 1000. Default is 1000.
+
+## List all Alerts of a User [GET]
+
++ Response 200 (application/json)
+
+        {
+            "alerts": [
+                {"action": "fall", "user_id": "2", "pushed_at": 1473388947}, 
+                {"action": "help", "user_id": "2", "pushed_at": 1473388943}, 
+                {"action": "help", "user_id": "2", "pushed_at": 1473388900}
+            ]
+        }

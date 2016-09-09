@@ -1,0 +1,63 @@
+# Group Reminders
+
+## Reminders Collection [/v0/users/{user_id}/reminders]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+
+### List all Reminders of a User [GET]
+
++ Response 200 (application/json)
++ Attributes (ReminderGET)
+
+
+### Create a new Reminder [PUT]
+
++ Request (application/json)
+
+    + Attributes(Reminder)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /reminders/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+## Single Reminder [/v0/users/{user_id}/reminders/{reminder_id}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + reminder_id (UUID) - Identifier of the Reminder in the form of a UUID
+
+### Get information about a specific Reminder [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (ReminderGET)
+
+### Update a Reminder [PUT]
+
++ Request (application/json)
+
+    + Attributes (Reminder)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /reminders/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "reminder_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+### Delete a Reminder [DELETE]
++ Response 204 (application/json)
