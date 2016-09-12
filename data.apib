@@ -1,0 +1,78 @@
+## Data Structures
+
+### AlertsReturn
+- array (alerts)
+    - Include Alert1
+    - Include Alert2
+    - Include Alert3
+
+### Alert1
+- Include User
+- action (enum)
+    - fall
+    - help
+- pushed_at: 1473388947 (number) 
+
+### Alert2
+- Include User
+- action (enum)
+    - fall
+    - help
+- pushed_at: 1473387910 (number) 
+
+### Alert3
+- Include User
+- action (enum)
+    - fall
+    - help
+- pushed_at: 1473381012 (number) 
+
+### Dashboard
+
+- steps (array[number]) - array of integers, number of steps taken by the user
+- heartbeats (array[number]) - array of integers, number of heartbeats per minute
+- temperature (array[number]) - array of floats, body temperature in Celcius degrees. PS: temperature always returns an empty array; it's not been collected yet.
+- batterylevel (array[number]) - array of integers, between 0 and 100
+- caloriesspent (array[number]) - array of integer, number of calories spent
+- distance (array[number]) - array of integer, how many meters were walked
+- timestamp (array[number]) - array of integer, the correspondent timestamp of the data
+
+### User
+- user_id: `e7ce178e-be87-449a-80fa-96182d8d4dec` (string, required) - The user's universally unique identifier.
+
+### Reminder 
+- repeating (array, required) - array containing the days the alarm should ring (true) or not (false). It uses the convention where each position represents a day (Sunday, Monday, ..., Saturday)
+    - True
+    - True
+    - False
+    - False
+    - False
+    - True
+    - True
++ message: Play soccer (required) - some message about the reminder
++ time: 12:00:00 (required) - when the reminder should ring
+- active (enum)
+    - True
+    - False
+
+### ReminderOBJ
+- Include User
+- reminder_id: `7912ab08-a014-4bbc-a327-ba0c96158771`
+- Include Reminder 
+
+### ReminderGET
+- reminders (array[ReminderOBJ]) - array containing the user's reminders
+
+### Contact
+- name: `Carla Souza` (string, required) - the contact's name
+- email: `carlinha@grandma.com` (string, optional) - the contact's email 
+- phone: `+55 31 2344-4234` (string, required) - the contact's phone
+- relationship: 4 (number, required) - the contact's relationship level 
+
+### ContactOBJ
+- Include User
+- contact_id: `0abc12e8-a014-4bbc-a327-ba0c96158771`
+- Include Contact 
+
+### ContactGET
+- contacts (array[ContactOBJ]) - array containing the user's contacts

@@ -3,3 +3,5 @@ endpoints/alerts.apib
 endpoints/contacts.apib
 endpoints/dashboard.apib
 endpoints/reminders.apib
+
+data.apib

@@ -1,14 +1,30 @@
-# Group Dashboard
+# Group General Information
+
+Fetches information collected about a user during a specific period of time. Once the LinCare monitor is the only way to fed our system, you can only perform a GET operation on this endpoint.
 
 ## Dashboard [/v0/users/{user_id}/dashboard{?since}{?until}{?fields}]
 
 + Parameters
     + user_id (UUID) - Identifier of the User in the form of a UUID
-    + since (timestamp) - blabla
-    + until (timestamp) - blabla
-    + fields (list) - blabla
+    + since (optional, UNIX Timestamp with UTC) - Mininum thereshold of the datetime when data was collected.
+        + Default: `current timestamp`
+    + until (optional, UNIX Timestamp with UTC) - Maximum thereshold of the datetime when data was collected
+        + Default: `current timestamp delayed by one day`
+    + fields (enum[<List>]) - In case of someone doesn't need all the fields, she/he can 
+    filter only the relevant ones. Fields must be digited in a list format (a,b,..., c) and are case insensitive.
+        + Members
+            + `all`
+            + `steps`
+            + `heartbeats`
+            + `temperature`
+            + `batterylevel`
+            + `caloriesspent`
+            + `distance`
 
-### List all Reminders of a User [GET]
+### Fetches information collected by LinCare [GET]
+
++ Request (application/json)
 
 + Response 200 (application/json)
-+ Attributes (ReminderGET)
+
+    + Attributes (Dashboard)
