@@ -5,12 +5,156 @@ HOST: http://polls.apiblueprint.org/
 
 Allows third-part clients to connect and get rich information from LinCare's databases and mining process.
 
-# Manifest
+# Group History
+
+Collect information about the historic of a user.
+
+## Alerts Collection [/v0/historic/alerts/{user_id}{?limit}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + limit (optional, Number) - How many Alerts to return. Max is 1000. Default is 1000.
+
+## List all Alerts of a User [GET]
+
++ Response 200 (application/json)
+
+        {
+            "alerts": [
+                {"action": "fall", "user_id": "2", "pushed_at": 1473388947}, 
+                {"action": "help", "user_id": "2", "pushed_at": 1473388943}, 
+                {"action": "help", "user_id": "2", "pushed_at": 1473388900}
+            ]
+        }
+
+# Group Contacts
+
+## Contacts Collection [/v0/users/{user_id}/contacts]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+
+### List all Contacts of a User [GET]
+
++ Response 200 (application/json)
+
+    + Attributes(ContactGET)
+
+### Create a new Contact [PUT]
+
++ Request (application/json)
+
+    + Attributes(Contact)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /contacts/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+## Single Contact [/v0/users/{user_id}/contacts/{contact_id}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + contact_id (UUID) - Identifier of the Contact in the form of a UUID
+
+### Get information about a specific Contact [GET]
+
++ Response 200 (application/json)
+
++ Attributes(Contact)
+
+### Update a Contact [PUT]
+
++ Request (application/json)
+
+    + Attributes(Contact)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /contacts/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+### Delete a Contact [DELETE]
++ Response 204 (application/json)
 
 
+# Group Reminders
+
+## Reminders Collection [/v0/users/{user_id}/reminders]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+
+### List all Reminders of a User [GET]
+
++ Response 200 (application/json)
++ Attributes (ReminderGET)
 
 
+### Create a new Reminder [PUT]
 
++ Request (application/json)
+
+    + Attributes(Reminder)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /reminders/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+## Single Reminder [/v0/users/{user_id}/reminders/{reminder_id}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + reminder_id (UUID) - Identifier of the Reminder in the form of a UUID
+
+### Get information about a specific Reminder [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (ReminderGET)
+
+### Update a Reminder [PUT]
+
++ Request (application/json)
+
+    + Attributes (Reminder)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /reminders/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "reminder_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+### Delete a Reminder [DELETE]
++ Response 204 (application/json)
 
 
 ## Data Structures
