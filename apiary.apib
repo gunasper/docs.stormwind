@@ -1,0 +1,284 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Stormwind LinCare API
+
+Allows third-part clients to connect and get rich information from LinCare's databases and mining process.
+
+
+
+# Group General Information
+
+
+
+
+
+## Alerts Collection [/v0/history/alerts/{user_id}{?limit}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + limit (optional, Number) - How many Alerts to return. Max is 1000. Default is 1000.
+
+## List all Alerts of a User [GET]
+
++ Response 200 (application/json)
+
++ Attributes (AlertsReturn)
+
+
+
+
+
+
+
+## Dashboard [/v0/users/{user_id}/dashboard{?since}{?until}{?fields}]
+
+Fetches information collected about a user during a specific period of time. Once the LinCare monitor is the only way to fed our system, you can only perform a GET operation on this endpoint.
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + since (optional, UNIX Timestamp with UTC) - Mininum thereshold of the datetime when data was collected.
+        + Default: `current timestamp`
+    + until (optional, UNIX Timestamp with UTC) - Maximum thereshold of the datetime when data was collected
+        + Default: `current timestamp delayed by one day`
+    + fields (enum[<List>]) - In case of someone doesn't need all the fields, she/he can 
+    filter only the relevant ones. Fields must be digited in a list format (a,b,..., c) and are case insensitive.
+        + Members
+            + `all`
+            + `steps`
+            + `heartbeats`
+            + `temperature`
+            + `batterylevel`
+            + `caloriesspent`
+            + `distance`
+
+### Fetches information collected by LinCare [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Attributes (Dashboard)
+
+
+
+
+
+# Group Contacts
+
+## Contacts Collection [/v0/users/{user_id}/contacts]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+
+### List all Contacts of a User [GET]
+
++ Response 200 (application/json)
+
+    + Attributes(ContactGET)
+
+### Create a new Contact [PUT]
+
++ Request (application/json)
+
+    + Attributes(Contact)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /contacts/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+## Single Contact [/v0/users/{user_id}/contacts/{contact_id}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + contact_id (UUID) - Identifier of the Contact in the form of a UUID
+
+### Get information about a specific Contact [GET]
+
++ Response 200 (application/json)
+
++ Attributes(Contact)
+
+### Update a Contact [PUT]
+
++ Request (application/json)
+
+    + Attributes(Contact)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /contacts/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+### Delete a Contact [DELETE]
++ Response 204 (application/json)
+
+
+
+
+
+
+
+# Group Reminders
+
+## Reminders Collection [/v0/users/{user_id}/reminders]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+
+### List all Reminders of a User [GET]
+
++ Response 200 (application/json)
++ Attributes (ReminderGET)
+
+
+### Create a new Reminder [PUT]
+
++ Request (application/json)
+
+    + Attributes(Reminder)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /reminders/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "contact_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+## Single Reminder [/v0/users/{user_id}/reminders/{reminder_id}]
+
++ Parameters
+    + user_id (UUID) - Identifier of the User in the form of a UUID
+    + reminder_id (UUID) - Identifier of the Reminder in the form of a UUID
+
+### Get information about a specific Reminder [GET]
+
++ Response 200 (application/json)
+
+    + Attributes (ReminderGET)
+
+### Update a Reminder [PUT]
+
++ Request (application/json)
+
+    + Attributes (Reminder)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /reminders/13346de1-d67b-41e7-b692-8f263afeebc7
+
+    + Body
+
+            {
+                "reminder_id": "13346de1-d67b-41e7-b692-8f263afeebc7"
+            }
+
+### Delete a Reminder [DELETE]
++ Response 204 (application/json)
+
+
+
+
+
+
+
+## Data Structures
+
+### AlertsReturn
+- array (Alert1)
+    - Include Alert1
+    - Include Alert2
+    - Include Alert3
+
+### Alert1
+- Include User
+- action (enum)
+    - fall
+    - help
+- pushed_at: 1473388947 (number) 
+
+### Alert2
+- Include User
+- action (enum)
+    - fall
+    - help
+- pushed_at: 1473387910 (number) 
+
+### Alert3
+- Include User
+- action (enum)
+    - fall
+    - help
+- pushed_at: 1473381012 (number) 
+
+### Dashboard
+
+- steps (array[number]) - array of integers, number of steps taken by the user
+- heartbeats (array[number]) - array of integers, number of heartbeats per minute
+- temperature (array[number]) - array of floats, body temperature in Celcius degrees. PS: temperature always returns an empty array; it's not been collected yet.
+- batterylevel (array[number]) - array of integers, between 0 and 100
+- caloriesspent (array[number]) - array of integer, number of calories spent
+- distance (array[number]) - array of integer, how many meters were walked
+- timestamp (array[number]) - array of integer, the correspondent timestamp of the data
+
+### User
+- user_id: `e7ce178e-be87-449a-80fa-96182d8d4dec` (string, required) - The user's universally unique identifier.
+
+### Reminder 
+- repeating (array, required) - array containing the days the alarm should ring (true) or not (false). It uses the convention where each position represents a day (Sunday, Monday, ..., Saturday)
+    - True
+    - True
+    - False
+    - False
+    - False
+    - True
+    - True
++ message: Play soccer (required) - some message about the reminder
++ time: 12:00:00 (required) - when the reminder should ring
+- active (enum)
+    - True
+    - False
+
+### ReminderOBJ
+- Include User
+- reminder_id: `7912ab08-a014-4bbc-a327-ba0c96158771`
+- Include Reminder 
+
+### ReminderGET
+- reminders (array[ReminderOBJ]) - array containing the user's reminders
+
+### Contact
+- name: `Carla Souza` (string, required) - the contact's name
+- email: `carlinha@grandma.com` (string, optional) - the contact's email 
+- phone: `+55 31 2344-4234` (string, required) - the contact's phone
+- relationship: 4 (number, required) - the contact's relationship level 
+
+### ContactOBJ
+- Include User
+- contact_id: `0abc12e8-a014-4bbc-a327-ba0c96158771`
+- Include Contact 
+
+### ContactGET
+- contacts (array[ContactOBJ]) - array containing the user's contacts
