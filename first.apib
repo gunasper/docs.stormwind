@@ -1,0 +1,57 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Stormwind LinCare API
+
+Allows third-part clients to connect and get rich information from LinCare's databases and mining process.
+
+# Manifest
+
+
+
+
+
+
+
+## Data Structures
+
+### User
+- user_id: `e7ce178e-be87-449a-80fa-96182d8d4dec` (string, required) - teste
+
+### Reminder 
+- repeating (array, required) - array containing the days the alarm should ring (true) or not (false). It uses the convention where each position represents a day (Sunday, Monday, ..., Saturday)
+    - True
+    - True
+    - False
+    - False
+    - False
+    - True
+    - True
++ message: Play soccer (required) - some message about the reminder
++ time: 12:00:00 (required) - when the reminder should ring
+- active (enum)
+    - True
+    - False
+
+### ReminderOBJ
+- Include User
+- reminder_id: `7912ab08-a014-4bbc-a327-ba0c96158771`
+- Include Reminder 
+
+### ReminderGET
+- reminders (array[ReminderOBJ]) - array containing the user's reminders
+
+
+### Contact
+- name: `Carla Souza` (string, required) - the contact's name
+- email: `carlinha@grandma.com` (string, optional) - the contact's email 
+- phone: `+55 31 2344-4234` (string, required) - the contact's phone
+- relationship: 4 (number, required) - the contact's relationship level 
+
+### ContactOBJ
+- Include User
+- contact_id: `0abc12e8-a014-4bbc-a327-ba0c96158771`
+- Include Contact 
+
+### ContactGET
+- contacts (array[ContactOBJ]) - array containing the user's contacts
